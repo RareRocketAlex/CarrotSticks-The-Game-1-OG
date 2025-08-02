@@ -22,12 +22,13 @@
 
         <!-- Set the background colour of the document -->
         <style>
-            body {
-                background: #0;
-                color: #cccccc;
-                margin: 0px;
-                padding: 0px;
-                border: 0px;
+            html, body {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+                background: #000;
+                overflow: hidden;
             }
 
             canvas {
@@ -38,6 +39,7 @@
                 margin: 0px;
                 padding: 0px;
                 border: 0px;
+                display: block;
             }
             :-webkit-full-screen #canvas {
                 width: 100%;
@@ -73,7 +75,6 @@
                 text-align: center;
             }
             /* END - Custom Runner Styles */
-            
         </style>
 
         <!-- Custom PostStyle code is injected here -->
@@ -107,7 +108,30 @@
         <!-- Builtin injector for injecting runner path -->
         
 
-        <script>window.onload = GameMaker_Init;</script>
+        <script>
+            window.onload = function() {
+                GameMaker_Init();
+                resizeGame();
+                window.addEventListener('resize', resizeGame);
+            };
+
+            function resizeGame() {
+                const canvas = document.getElementById("canvas");
+                const aspect = 1000 / 500; // original aspect ratio
+
+                let windowAspect = window.innerWidth / window.innerHeight;
+
+                if (windowAspect > aspect) {
+                    // window is wider -> fit height
+                    canvas.style.width = (window.innerHeight * aspect) + "px";
+                    canvas.style.height = window.innerHeight + "px";
+                } else {
+                    // window is taller -> fit width
+                    canvas.style.width = window.innerWidth + "px";
+                    canvas.style.height = (window.innerWidth / aspect) + "px";
+                }
+            }
+        </script>
 
         <!-- Builtin injector for injecting google analytics code -->
         
@@ -117,3 +141,4 @@
     <!-- Custom PostBody code is injected here -->
     
 </html>
+

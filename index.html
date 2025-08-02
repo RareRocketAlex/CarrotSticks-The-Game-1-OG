@@ -1,23 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <!-- Custom PreHead code is injected here -->
-    
-
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta charset="utf-8"/>
-
-        <!-- Builtin injector for disabling cache -->
         <meta http-equiv="pragma" content="no-cache"/>
-
-        <!-- Set the title bar of the page -->
         <title>carrrotsticksthegame</title>
 
-        <!-- Set the background colour of the document -->
         <style>
             html, body {
                 margin: 0;
@@ -30,12 +22,17 @@
 
             canvas {
                 display: block;
-                margin: auto;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
                 image-rendering: optimizeSpeed;
                 -webkit-interpolation-mode: nearest-neighbor;
                 -ms-touch-action: none;
                 touch-action: none;
             }
+
             :-webkit-full-screen #canvas {
                 width: 100%;
                 height: 100%;
@@ -69,9 +66,7 @@
             div.gm4html5_login_header {
                 text-align: center;
             }
-            /* END - Custom Runner Styles */
         </style>
-
     </head>
 
     <body>
@@ -84,7 +79,7 @@
         <!-- Run the game code -->
         <script type="text/javascript" src="html5game/carrrotsticksthegame.js?cachebust=1645348017"></script>
 
-        <!-- Resize logic -->
+        <!-- Resize logic (stretch) -->
         <script>
             window.onload = function () {
                 GameMaker_Init();
@@ -94,30 +89,12 @@
 
             function resizeGame() {
                 const canvas = document.getElementById("canvas");
-                const gameWidth = 1000; // original width
-                const gameHeight = 500; // original height
-                const aspect = gameWidth / gameHeight;
-                const windowAspect = window.innerWidth / window.innerHeight;
-
-                if (windowAspect > aspect) {
-                    // Window is wider → fit height
-                    canvas.style.height = window.innerHeight + "px";
-                    canvas.style.width = (window.innerHeight * aspect) + "px";
-                } else {
-                    // Window is taller → fit width
-                    canvas.style.width = window.innerWidth + "px";
-                    canvas.style.height = (window.innerWidth / aspect) + "px";
-                }
-
-                // Center horizontally and vertically
-                canvas.style.position = "absolute";
-                canvas.style.left = ((window.innerWidth - parseFloat(canvas.style.width)) / 2) + "px";
-                canvas.style.top = ((window.innerHeight - parseFloat(canvas.style.height)) / 2) + "px";
+                // Fill full browser area regardless of aspect ratio
+                canvas.style.width = window.innerWidth + "px";
+                canvas.style.height = window.innerHeight + "px";
             }
         </script>
-
     </body>
-
 </html>
 
 

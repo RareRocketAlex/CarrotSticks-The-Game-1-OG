@@ -7,7 +7,7 @@
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name ="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta charset="utf-8"/>
 
@@ -16,9 +16,6 @@
 
         <!-- Set the title bar of the page -->
         <title>carrrotsticksthegame</title>
-
-        <!-- Custom PreStyle code is injected here -->
-        
 
         <!-- Set the background colour of the document -->
         <style>
@@ -32,14 +29,12 @@
             }
 
             canvas {
+                display: block;
+                margin: auto;
                 image-rendering: optimizeSpeed;
                 -webkit-interpolation-mode: nearest-neighbor;
                 -ms-touch-action: none;
                 touch-action: none;
-                margin: 0px;
-                padding: 0px;
-                border: 0px;
-                display: block;
             }
             :-webkit-full-screen #canvas {
                 width: 100%;
@@ -77,27 +72,11 @@
             /* END - Custom Runner Styles */
         </style>
 
-        <!-- Custom PostStyle code is injected here -->
-        
-
-        <!-- Builtin injector for injecting flurry analytics code -->
-        
     </head>
-
-    <!-- Custom PostHead code is injected here -->
-    
-
-    <!-- Custom PreBody code is injected here -->
-    
 
     <body>
         <div class="gm4html5_div_class" id="gm4html5_div_id">
-            
-            <!-- Builtin injector for splash screen -->
-            
-
-            <!-- Create the canvas element the game draws to -->
-            <canvas id="canvas" width="1000" height="500" >
+            <canvas id="canvas" width="1000" height="500">
                 <p>Your browser doesn't support HTML5 canvas.</p>
             </canvas>
         </div>
@@ -105,40 +84,40 @@
         <!-- Run the game code -->
         <script type="text/javascript" src="html5game/carrrotsticksthegame.js?cachebust=1645348017"></script>
 
-        <!-- Builtin injector for injecting runner path -->
-        
-
+        <!-- Resize logic -->
         <script>
-            window.onload = function() {
+            window.onload = function () {
                 GameMaker_Init();
                 resizeGame();
-                window.addEventListener('resize', resizeGame);
+                window.addEventListener("resize", resizeGame);
             };
 
             function resizeGame() {
                 const canvas = document.getElementById("canvas");
-                const aspect = 1000 / 500; // original aspect ratio
-
-                let windowAspect = window.innerWidth / window.innerHeight;
+                const gameWidth = 1000; // original width
+                const gameHeight = 500; // original height
+                const aspect = gameWidth / gameHeight;
+                const windowAspect = window.innerWidth / window.innerHeight;
 
                 if (windowAspect > aspect) {
-                    // window is wider -> fit height
-                    canvas.style.width = (window.innerHeight * aspect) + "px";
+                    // Window is wider → fit height
                     canvas.style.height = window.innerHeight + "px";
+                    canvas.style.width = (window.innerHeight * aspect) + "px";
                 } else {
-                    // window is taller -> fit width
+                    // Window is taller → fit width
                     canvas.style.width = window.innerWidth + "px";
                     canvas.style.height = (window.innerWidth / aspect) + "px";
                 }
+
+                // Center horizontally and vertically
+                canvas.style.position = "absolute";
+                canvas.style.left = ((window.innerWidth - parseFloat(canvas.style.width)) / 2) + "px";
+                canvas.style.top = ((window.innerHeight - parseFloat(canvas.style.height)) / 2) + "px";
             }
         </script>
 
-        <!-- Builtin injector for injecting google analytics code -->
-        
-
     </body>
 
-    <!-- Custom PostBody code is injected here -->
-    
 </html>
+
 
